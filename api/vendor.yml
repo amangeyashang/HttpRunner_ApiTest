@@ -1,0 +1,22 @@
+- config:
+    name:卖家端接口集
+    request:
+    base_uel:http://192.168.1.112:10010/ui
+- test:
+    name:登录
+    request:
+        url:/users/loginCheck.do
+        method:POST
+        Content-Type:application/x-www-form-urlencoded
+        body:
+            cityCode:
+            cityName:
+            lon:
+            lat:
+            memberType:
+            rememberMe:
+            account:18000000003
+            password:123456
+    validate:
+        - eq:[status_code,200]
+        - eq:[content.meta.msg:"success"]
