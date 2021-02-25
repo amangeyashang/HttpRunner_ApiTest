@@ -17,7 +17,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunRequest("买家端-查询部分店铺")
+            RunRequest("查询部分店铺")
             .with_variables(**{})
             .post("/depot/searchNearDepot")
             .with_headers(
@@ -38,7 +38,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .assert_equal("body.msg","success")
         ),
         Step(
-            RunRequest("买家端-获取弹窗内容")
+            RunRequest("获取弹窗内容")
             .with_variables(**{})
             .post("/indexApiService/getPopup")
             .with_headers(
@@ -59,7 +59,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .assert_equal("body.msg","success")
         ),
         Step(
-            RunRequest("买家端-获取商户首页模版")
+            RunRequest("获取商户首页模版")
             .with_variables(**{})
             .post("/indexApiService/getTemplate")
             .with_headers(
@@ -82,7 +82,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .assert_equal("body.msg","success")
         ),
         Step(
-            RunRequest("买家端-获取模板详情")
+            RunRequest("获取模板详情")
             .with_variables(**{})
             .post("/indexApiService/templateDetails")
             .with_headers(
@@ -112,5 +112,211 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")
-        )
+        ),
+        Step(
+            RunRequest("购物车列表")
+            .with_variables(**{})
+            .post("/cart/getShopCartInfo")
+            .with_headers(
+                **{
+                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
+                    "Content-Type":"application/json",
+                }
+            )
+            .with_json(
+                {
+                    "depotCode":"$vendorCode"
+                }
+            )
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
+        ),
+        #优惠券
+        Step(
+            RunRequest("优惠券中心")
+            .with_variables(**{})
+            .post("/vendor/couponCenter")
+            .with_headers(
+                **{
+                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
+                    "Content-Type":"application/json",
+                }
+            )
+            .with_json(
+                {
+                    "couponChannelType":"WECHAT",
+                    "vendorId":"$vendorId",
+                }
+            )
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
+        ),
+        Step(
+            RunRequest("我的优惠券-未使用")
+            .with_variables(**{})
+            .post("/vendor/userCouponPage")
+            .with_headers(
+                **{
+                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
+                    "Content-Type":"application/json",
+                }
+            )
+            .with_params(
+                **{
+                    "memberId":"2494",
+                    "vendorCode":"$vendorCode",
+                }
+            )
+            .with_json(
+                {
+                    "couponState": "UNUSED",
+                    "page": 1,
+                    "size": 10
+                }
+            )
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
+        ),
+        Step(
+            RunRequest("我的优惠券-已使用")
+                .with_variables(**{})
+                .post("/vendor/userCouponPage")
+                .with_headers(
+                **{
+                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
+                    "Content-Type":"application/json",
+                }
+            )
+                .with_params(
+                **{
+                    "memberId":"2494",
+                    "vendorCode":"$vendorCode",
+                }
+            )
+                .with_json(
+                {
+                    "couponState": "USED",
+                    "page": 1,
+                    "size": 10
+                }
+            )
+                .validate()
+                .assert_equal("status_code",200)
+                .assert_equal("body.msg","success")
+        ),
+        Step(
+            RunRequest("我的优惠券-已过期")
+                .with_variables(**{})
+                .post("/vendor/userCouponPage")
+                .with_headers(
+                **{
+                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
+                    "Content-Type":"application/json",
+                }
+            )
+                .with_params(
+                **{
+                    "memberId":"2494",
+                    "vendorCode":"$vendorCode",
+                }
+            )
+                .with_json(
+                {
+                    "couponState": "EXPIRED",
+                    "page": 1,
+                    "size": 10
+                }
+            )
+                .validate()
+                .assert_equal("status_code",200)
+                .assert_equal("body.msg","success")
+        ),
+        Step(
+            RunRequest("获取精选商品分类")
+            .with_variables(**{})
+            .post("/indexApiService/getFeaturedProductsCategorys")
+            .with_headers(
+                **{
+                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
+                    "Content-Type":"application/json",
+                }
+            )
+            .with_json(
+                {
+
+                    "vendorId": "$vendorId",
+                    "vendorCode": "$vendorCode"
+
+                }
+            )
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
+        ),
+        Step(
+            RunRequest("获取精选商品列表")
+            .with_variables(**{})
+            .post("/indexApiService/getFeaturedProducts")
+            .with_headers(
+                **{
+                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
+                    "Content-Type":"application/json",
+                }
+            )
+            .with_json(
+                {
+                    "vendorCode": "$vendorCode",
+                    "size": 5,
+                    "page": 1,
+                    "memberId": "2494"
+                }
+            )
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
+        ),
+        Step(
+            RunRequest("店铺分类信息")
+            .with_variables(**{})
+            .get("/product/getCategoryByVendorCode")
+            .with_params(**{"os":"min","memberId":"2494","lat":"29.71797999388022","lon":"106.63042999999999","userToken":"a07a113e2bc043058e10d36382a816a4","vendorCode":"VC10003"})
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
+        ),
+        Step(
+            RunRequest("搜索结果")
+            .with_variables(**{})
+            .post("/product/searchProduct")
+            .with_headers(
+                **{
+                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
+                    "Content-Type":"application/json",
+                }
+            )
+            .with_json(
+                {
+                    "memberId":2494,
+                    "categoryId":"199",
+                    "categoryLv":"2",
+                    "couponId":"",
+                    "coupon":"",
+                    "promotionId":"",
+                    "promotionType":null,
+                    "depotProduct":true,
+                    "depotCode":"VC10003",
+                    "sort":"DEFAULT_SORT",
+                    "page":-2,
+                    "searchType":"PRODUCT",
+                    "type":0
+                }
+            )
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
+        ),
+
     ]
