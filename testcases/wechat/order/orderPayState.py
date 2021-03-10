@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/5 14:47'
+__date__ = '2021/3/10 9:54'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("搜索结果")
+        Config("调用支付接口后订单状态")
             .variables(**{})
             .base_url("${ENV(base_url_wechat_online)}")
             .verify(False)
@@ -14,9 +14,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunRequest("搜索结果-001")
+            RunRequest("调用支付接口后订单状态-001")
                 .with_variables(**{})
-                .post("/product/searchProduct")
+                .post("/order/orderPayState")
                 .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -25,23 +25,13 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
                 .with_json(
                 {
-                    "memberId":2494,
-                    "categoryId":"199",
-                    "categoryLv":"2",
-                    "couponId":"",
-                    "coupon":"",
-                    "promotionId":"",
-                    "promotionType":'null',
-                    "depotProduct":True,
-                    "depotCode":"VC10003",
-                    "sort":"DEFAULT_SORT",
-                    "page":-2,
-                    "searchType":"PRODUCT",
-                    "type":0
+                    "orderCode":"SOHGSPRO21031000008",
+                    "summaryOrder":true,
+                    "channel":"APP"
                 }
             )
                 .validate()
                 .assert_equal("status_code",200)
                 .assert_equal("body.msg","success")
-        ),
+        )
     ]

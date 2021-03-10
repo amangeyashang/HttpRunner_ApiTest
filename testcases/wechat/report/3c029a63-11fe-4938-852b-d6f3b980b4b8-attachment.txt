@@ -1,0 +1,121 @@
+2021-03-09 14:57:54.447 | INFO     | httprunner.loader:load_dot_env_file:127 - Loading environment variables from F:\Tools\python\PyCharmProjects\autoTestApi_demo\.env
+2021-03-09 14:57:54.447 | DEBUG    | httprunner.utils:set_os_environ:33 - Set OS environment variable: base_url_vendor_online
+2021-03-09 14:57:54.447 | DEBUG    | httprunner.utils:set_os_environ:33 - Set OS environment variable: base_url_vendor_develop_ui
+2021-03-09 14:57:54.447 | DEBUG    | httprunner.utils:set_os_environ:33 - Set OS environment variable: base_url_vendor_develop_vendor
+2021-03-09 14:57:54.447 | DEBUG    | httprunner.utils:set_os_environ:33 - Set OS environment variable: base_url_wechat_develop_rest
+2021-03-09 14:57:54.448 | DEBUG    | httprunner.utils:set_os_environ:33 - Set OS environment variable: base_url_wechat_online
+2021-03-09 14:57:54.448 | DEBUG    | httprunner.utils:set_os_environ:33 - Set OS environment variable: vendorCode
+2021-03-09 14:57:54.448 | DEBUG    | httprunner.utils:set_os_environ:33 - Set OS environment variable: vendorId
+2021-03-09 14:57:54.448 | DEBUG    | httprunner.utils:set_os_environ:33 - Set OS environment variable: sellerId
+2021-03-09 14:57:54.453 | INFO     | httprunner.runner:test_start:451 - Start to run testcase: 获取商户首页模版, TestCase ID: 0cd5ff93-3be1-410f-bd9a-dcae5f352b12
+2021-03-09 14:57:54.454 | INFO     | httprunner.runner:__run_step:292 - run step begin: 获取商户首页模版-001 >>>>>>
+2021-03-09 14:57:54.666 | DEBUG    | httprunner.client:request:186 - client IP: 192.168.1.29, Port: 55934
+2021-03-09 14:57:54.666 | DEBUG    | httprunner.client:request:194 - server IP: 47.98.30.126, Port: 443
+2021-03-09 14:57:54.667 | DEBUG    | httprunner.client:log_print:40 - 
+================== request details ==================
+method   : POST
+url      : https://api.wkhgs.com/indexApiService/getTemplate?vendorCode=VC10003
+headers  : {
+    "User-Agent": "HttpRunner/3.1.4",
+    "Accept-Encoding": "gzip, deflate",
+    "Accept": "*/*",
+    "Connection": "keep-alive",
+    "Content-Type": "application/json",
+    "HRUN-Request-ID": "HRUN-0cd5ff93-3be1-410f-bd9a-dcae5f352b12-074455",
+    "Content-Length": "2"
+}
+cookies  : {}
+body     : {}
+
+2021-03-09 14:57:54.668 | DEBUG    | httprunner.client:log_print:40 - 
+================== response details ==================
+status_code : 200
+headers  : {
+    "Date": "Tue, 09 Mar 2021 06:59:26 GMT",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Transfer-Encoding": "chunked",
+    "Connection": "keep-alive",
+    "X-Application-Context": "rest:61001"
+}
+cookies  : {}
+encoding : UTF-8
+content_type : application/json;charset=UTF-8
+body     : {
+    "code": 0,
+    "msg": "success",
+    "data": [
+        {
+            "id": "192",
+            "createTimestamp": 1613614031000,
+            "updateTimestamp": null,
+            "isDelete": false,
+            "isState": true,
+            "overdueTime": null,
+            "remark": null,
+            "sequence": 0,
+            "takeTime": null,
+            "templateContent": null,
+            "templateName": "\u5206\u7c7b\u6a21\u677f",
+            "templateType": "commodityclass_",
+            "vendorCode": "VC10003",
+            "vendorId": "546520236057329664"
+        },
+        {
+            "id": "168",
+            "createTimestamp": 1579482949000,
+            "updateTimestamp": 1579509343000,
+            "isDelete": false,
+            "isState": true,
+            "overdueTime": null,
+            "remark": null,
+            "sequence": 1,
+            "takeTime": null,
+            "templateContent": null,
+            "templateName": "banner\u6a21\u677f",
+            "templateType": "image_",
+            "vendorCode": "VC10003",
+            "vendorId": "546520236057329664"
+        },
+        {
+            "id": "170",
+            "createTimestamp": 1579483117000,
+            "updateTimestamp": 1614591046000,
+            "isDelete": false,
+            "isState": true,
+            "overdueTime": null,
+            "remark": null,
+            "sequence": 2,
+            "takeTime": null,
+            "templateContent": null,
+            "templateName": "\u5355\u56fe\u6a21\u677f",
+            "templateType": "image_",
+            "vendorCode": "VC10003",
+            "vendorId": "546520236057329664"
+        },
+        {
+            "id": "190",
+            "createTimestamp": 1609403505000,
+            "updateTimestamp": 1614591047000,
+            "isDelete": false,
+            "isState": true,
+            "overdueTime": null,
+            "remark": null,
+            "sequence": 3,
+            "takeTime": null,
+            "templateContent": null,
+            "templateName": "\u5e7f\u544a\u56fe\u6a21\u677f",
+            "templateType": "image_",
+            "vendorCode": "VC10003",
+            "vendorId": "546520236057329664"
+        }
+    ],
+    "ts": 1615273166881
+}
+
+2021-03-09 14:57:54.668 | INFO     | httprunner.client:request:218 - status_code: 200, response_time(ms): 211.0 ms, response_length: 0 bytes
+2021-03-09 14:57:54.668 | INFO     | httprunner.response:extract:176 - extract mapping: {'templateId1': '192', 'templateType1': 'commodityclass_'}
+2021-03-09 14:57:54.669 | INFO     | httprunner.response:validate:246 - assert status_code equal 200(int)	==> pass
+2021-03-09 14:57:54.669 | INFO     | httprunner.response:validate:246 - assert body.msg equal success(str)	==> pass
+2021-03-09 14:57:54.669 | INFO     | httprunner.runner:__run_step:304 - run step end: 获取商户首页模版-001 <<<<<<
+
+2021-03-09 14:57:54.669 | INFO     | httprunner.runner:test_start:460 - generate testcase log: F:\Tools\python\PyCharmProjects\autoTestApi_demo\logs\0cd5ff93-3be1-410f-bd9a-dcae5f352b12.run.log

@@ -9,7 +9,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
         Config("获取商户首页模版")
-            .variables(**{"vendorId": "546520236057329664","vendorCode": "VC10003","sellerId":"2501"})
+            .variables(**{})
             .base_url("${ENV(base_url_wechat_online)}")
             .verify(False)
             .export(*["templateId1","templateType1"])
@@ -27,7 +27,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
                 .with_params(
                 **{
-                    "vendorCode":"$vendorCode"
+                    "vendorCode":"${ENV(vendorCode)}"
                 }
             )
                 .with_json({})
