@@ -15,18 +15,25 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("登录-001")
-                .with_variables(**{})
-                .post("/users/loginCheck")
-                .with_headers(
+            .with_variables(**{})
+            .post("/users/loginCheck")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/x-www-form-urlencoded",
                 }
             )
-                .with_data("account=18000000003&password=123456")
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .with_data(
+                {
+                    "account": "18000000003",
+                    "password": "123456"
+                }
+            )
+            .validate()
+            .extract()
+            .with_jmespath("body.data.sessionId","sessionId")
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

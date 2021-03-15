@@ -15,9 +15,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("删除订单-001")
-                .with_variables(**{})
-                .get("/orderManagement/deleteOrder")
-                .with_params(
+            .with_variables(**{})
+            .get("/orderManagement/deleteOrder")
+            .with_params(
                 **{
                     "os":"min",
                     "memberId":"${ENV(memberId)}",
@@ -28,9 +28,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "orderCode":"SOHGSPRO21031000008"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

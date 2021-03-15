@@ -15,15 +15,15 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("分页查询会员积分流水-001")
-                .with_variables(**{})
-                .post("/users/integral/pageQueryIntegralLog")
-                .with_headers(
+            .with_variables(**{})
+            .post("/users/integral/pageQueryIntegralLog")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "memberId":"${ENV(memberId)}",
                     "beginDate":"2021-03-01",
@@ -35,9 +35,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                         }
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.status","S")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.status","S")
         )
     ]
 

@@ -15,19 +15,19 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("根据用户查询账户信息-001")
-                .with_variables(**{})
-                .get("/account/query/queryAccountInfoByUser")
-                .with_params(
+            .with_variables(**{})
+            .get("/account/query/queryAccountInfoByUser")
+            .with_params(
                 **{
                     "userId":"${ENV(memberId)}",
                     "userType":"U",
                     "content":"查询中..."
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.message","成功")
-                .assert_equal("body.status","S")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.message","成功")
+            .assert_equal("body.status","S")
         )
     ]
 

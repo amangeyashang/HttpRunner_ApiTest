@@ -15,9 +15,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("分页查询账户资金明细-001")
-                .with_variables(**{})
-                .get("/account/query/pageQueryAccountLog")
-                .with_params(
+            .with_variables(**{})
+            .get("/account/query/pageQueryAccountLog")
+            .with_params(
                 **{
                     "vendorCode":"${ENV(vendorCode)}",
                     "accountNo":"20200909000000000026",
@@ -27,10 +27,10 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "endDate":"2021-03-31 23:59:59"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.message","成功")
-                .assert_equal("body.status","S")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.message","成功")
+            .assert_equal("body.status","S")
         )
     ]
 

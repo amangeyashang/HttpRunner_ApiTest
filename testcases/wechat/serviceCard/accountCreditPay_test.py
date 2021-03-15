@@ -15,15 +15,15 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("用户账户Account充值-001")
-                .with_variables(**{})
-                .post("/account/accountCreditPay")
-                .with_headers(
+            .with_variables(**{})
+            .post("/account/accountCreditPay")
+            .with_headers(
                 **{
                 "User-Agent":"HttpRunner/${get_httprunner_version()}",
                 "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                 "os":"min",
                 "memberId":"${ENV(memberId)}",
@@ -33,7 +33,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                 "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .with_json(
+            .with_json(
                 {
                 "memberId":"${ENV(memberId)}",
                 "amount":1,
@@ -44,10 +44,10 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                 "promotionId":7
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.message","成功")
-                .assert_equal("body.status","S")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.message","成功")
+            .assert_equal("body.status","S")
         )
     ]
 

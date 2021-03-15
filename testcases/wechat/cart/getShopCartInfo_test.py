@@ -15,22 +15,22 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("购物车列表-001")
-                .with_variables(**{})
-                .post("/indexApiService/getPopup")
-                .with_headers(
+            .with_variables(**{})
+            .post("/indexApiService/getPopup")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "depotCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

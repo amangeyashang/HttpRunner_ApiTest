@@ -15,15 +15,15 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("获取精选商品列表-001")
-                .with_variables(**{})
-                .post("/indexApiService/getFeaturedProducts")
-                .with_headers(
+            .with_variables(**{})
+            .post("/indexApiService/getFeaturedProducts")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "vendorCode": "${ENV(vendorCode)}",
                     "size": 5,
@@ -31,9 +31,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "memberId": "${ENV(memberId)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

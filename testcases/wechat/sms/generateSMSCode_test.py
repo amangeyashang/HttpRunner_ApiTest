@@ -15,24 +15,24 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("发送短信-001")
-                .with_variables(**{})
-                .post("/soa/miscService/generateSMSCode")
-                .with_headers(
+            .with_variables(**{})
+            .post("/soa/miscService/generateSMSCode")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "mobile": "18716280028",
                     "type": "CHANGE_MOBILE_OR_PASSWORD",
                     "size": 6
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

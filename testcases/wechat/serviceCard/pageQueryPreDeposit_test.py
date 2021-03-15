@@ -15,15 +15,15 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("分页查询预存活动订单流水列表-未领取-001")
-                .with_variables(**{})
-                .post("/promotion/preDeposit/pageQueryPreDeposit")
-                .with_headers(
+            .with_variables(**{})
+            .post("/promotion/preDeposit/pageQueryPreDeposit")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "os":"min",
                     "memberId":"${ENV(memberId)}",
@@ -34,7 +34,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
 
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "vendorCode":"${ENV(vendorCode)}",
                     "userId":"${ENV(memberId)}",
@@ -46,22 +46,22 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "status":"P"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.message","成功")
-                .assert_equal("body.status","S")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.message","成功")
+            .assert_equal("body.status","S")
         ),
         Step(
             RunRequest("分页查询预存活动订单流水列表-已领取-002")
-                .with_variables(**{})
-                .post("/promotion/preDeposit/pageQueryPreDeposit")
-                .with_headers(
+            .with_variables(**{})
+            .post("/promotion/preDeposit/pageQueryPreDeposit")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "os":"min",
                     "memberId":"${ENV(memberId)}",
@@ -72,7 +72,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
 
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "vendorCode":"${ENV(vendorCode)}",
                     "userId":"${ENV(memberId)}",
@@ -84,22 +84,22 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "status":"S"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.message","成功")
-                .assert_equal("body.status","S")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.message","成功")
+            .assert_equal("body.status","S")
         ),
         Step(
             RunRequest("分页查询预存活动订单流水列表-已过期-003")
-                .with_variables(**{})
-                .post("/promotion/preDeposit/pageQueryPreDeposit")
-                .with_headers(
+            .with_variables(**{})
+            .post("/promotion/preDeposit/pageQueryPreDeposit")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "os":"min",
                     "memberId":"${ENV(memberId)}",
@@ -110,7 +110,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
 
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "vendorCode":"${ENV(vendorCode)}",
                     "userId":"${ENV(memberId)}",
@@ -122,10 +122,10 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "status":"EXPIRED"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.message","成功")
-                .assert_equal("body.status","S")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.message","成功")
+            .assert_equal("body.status","S")
         )
     ]
 

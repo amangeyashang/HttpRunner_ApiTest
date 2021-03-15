@@ -17,26 +17,26 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("获取商户首页模版-001")
-                .with_variables(**{})
-                .post("/indexApiService/getTemplate")
-                .with_headers(
+            .with_variables(**{})
+            .post("/indexApiService/getTemplate")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .with_json({})
-                .extract()
-                .with_jmespath("body.data[0].id","templateId1")
-                .with_jmespath("body.data[0].templateType","templateType1")
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .with_json({})
+            .extract()
+            .with_jmespath("body.data[0].id","templateId1")
+            .with_jmespath("body.data[0].templateType","templateType1")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

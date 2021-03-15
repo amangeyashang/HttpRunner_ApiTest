@@ -15,84 +15,84 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("我的优惠券-未使用-001")
-                .with_variables(**{})
-                .post("/vendor/userCouponPage")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendor/userCouponPage")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "memberId":"${ENV(memberId)}",
                     "vendorCode":"${ENV(vendorCode)}",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "couponState": "UNUSED",
                     "page": 1,
                     "size": 10
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("我的优惠券-已使用-002")
-                .with_variables(**{})
-                .post("/vendor/userCouponPage")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendor/userCouponPage")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "memberId":"${ENV(memberId)}",
                     "vendorCode":"${ENV(vendorCode)}",
                 }
             )
-                .with_json(
-                {
-                    "couponState": "USED",
-                    "page": 1,
-                    "size": 10
-                }
-            )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .with_json(
+            {
+                "couponState": "USED",
+                "page": 1,
+                "size": 10
+            }
+        )
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("我的优惠券-已过期-003")
-                .with_variables(**{})
-                .post("/vendor/userCouponPage")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendor/userCouponPage")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "memberId":"${ENV(memberId)}",
                     "vendorCode":"${ENV(vendorCode)}",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "couponState": "EXPIRED",
                     "page": 1,
                     "size": 10
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

@@ -15,9 +15,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("获取带参小程序二维码-001")
-                .with_variables(**{})
-                .get("/weChat/getMinTwoDimensionaCode")
-                .with_params(
+            .with_variables(**{})
+            .get("/weChat/getMinTwoDimensionaCode")
+            .with_params(
                 **{
                     "os":"min",
                     "memberId":"${ENV(memberId)}",
@@ -28,10 +28,10 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "minPath":"18716280028,VC10003,U"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
-                .assert_equal("body.status","S")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
+            .assert_equal("body.status","S")
         )
     ]
 

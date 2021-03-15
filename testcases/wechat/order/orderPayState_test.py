@@ -15,24 +15,24 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("调用支付接口后订单状态-001")
-                .with_variables(**{})
-                .post("/orderManagement/orderPayState")
-                .with_headers(
+            .with_variables(**{})
+            .post("/orderManagement/orderPayState")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "orderCode":"SOHGSPRO21031000008",
                     "summaryOrder":true,
                     "channel":"APP"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

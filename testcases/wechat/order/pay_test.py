@@ -15,15 +15,15 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("支付-001")
-                .with_variables(**{})
-                .post("/orderManagement/pay")
+            .with_variables(**{})
+            .post("/orderManagement/pay")
                 .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "channel":"WEB",
                     "orderCode":"SOHGSPRO21030900023",
@@ -33,9 +33,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "payAccount":"onQ7N4inZqv-E8LmodEs0T2_-Vjg"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

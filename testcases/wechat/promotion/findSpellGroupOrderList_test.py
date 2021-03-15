@@ -15,15 +15,15 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("拼团订单列表-全部-001")
-                .with_variables(**{})
-                .post("/spellGroup/findSpellGroupOrderList")
-                .with_headers(
+            .with_variables(**{})
+            .post("/spellGroup/findSpellGroupOrderList")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "groupState":"ALL",
                     "memberId":2494,
@@ -34,21 +34,21 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                         }
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("拼团订单列表-拼团中-002")
-                .with_variables(**{})
-                .post("/spellGroup/findSpellGroupOrderList")
-                .with_headers(
+            .with_variables(**{})
+            .post("/spellGroup/findSpellGroupOrderList")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "groupState":"GROUP_ING",
                     "memberId":2494,
@@ -59,21 +59,21 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                         }
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("拼团订单列表-拼团成功-003")
-                .with_variables(**{})
-                .post("/spellGroup/findSpellGroupOrderList")
-                .with_headers(
+            .with_variables(**{})
+            .post("/spellGroup/findSpellGroupOrderList")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "groupState":"GROUP_SUCCESS",
                     "memberId":2494,
@@ -84,21 +84,21 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                         }
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("拼团订单列表-拼团失败-004")
-                .with_variables(**{})
-                .post("/spellGroup/findSpellGroupOrderList")
-                .with_headers(
+            .with_variables(**{})
+            .post("/spellGroup/findSpellGroupOrderList")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "groupState":"GROUP_FAIL",
                     "memberId":"${ENV(memberId)}",
@@ -109,9 +109,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                         }
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

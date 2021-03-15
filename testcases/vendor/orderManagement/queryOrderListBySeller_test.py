@@ -15,15 +15,15 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("订单列表(线上、线下)-所有订单-001")
-                .with_variables(**{})
-                .post("/vendorOrder/queryOrderListBySeller")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendorOrder/queryOrderListBySeller")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "page":1,
                     "size":10,
@@ -38,21 +38,21 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("订单列表(线上、线下)-待付款-002")
-                .with_variables(**{})
-                .post("/vendorOrder/queryOrderListBySeller")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendorOrder/queryOrderListBySeller")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "page":1,
                     "size":10,
@@ -67,21 +67,21 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("订单列表(线上、线下)-待接单-003")
-                .with_variables(**{})
-                .post("/vendorOrder/queryOrderListBySeller")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendorOrder/queryOrderListBySeller")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "page":1,
                     "size":10,
@@ -96,21 +96,21 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("订单列表(线上、线下)-待拣货-004")
-                .with_variables(**{})
-                .post("/vendorOrder/queryOrderListBySeller")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendorOrder/queryOrderListBySeller")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "page":1,
                     "size":10,
@@ -125,21 +125,21 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("订单列表(线上、线下)-待自提-005")
-                .with_variables(**{})
-                .post("/vendorOrder/queryOrderListBySeller")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendorOrder/queryOrderListBySeller")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "page":1,
                     "size":10,
@@ -154,21 +154,21 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("订单列表(线上、线下)-已完成-006")
-                .with_variables(**{})
-                .post("/vendorOrder/queryOrderListBySeller")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendorOrder/queryOrderListBySeller")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "page":1,
                     "size":10,
@@ -183,21 +183,21 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("订单列表(线上、线下)-已取消-007")
-                .with_variables(**{})
-                .post("/vendorOrder/queryOrderListBySeller")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendorOrder/queryOrderListBySeller")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "page":1,
                     "size":10,
@@ -212,9 +212,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
     ]
 

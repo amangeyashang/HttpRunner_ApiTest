@@ -15,23 +15,23 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("查询有效预存活动-001")
-                .with_variables(**{})
-                .post("/promotion/preDeposit/queryValidPreDepositPromotion")
-                .with_headers(
+            .with_variables(**{})
+            .post("/promotion/preDeposit/queryValidPreDepositPromotion")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.message","成功")
-                .assert_equal("body.status","S")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.message","成功")
+            .assert_equal("body.status","S")
         )
     ]
 

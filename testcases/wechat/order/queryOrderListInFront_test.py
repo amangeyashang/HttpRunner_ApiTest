@@ -15,15 +15,15 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("订单列表-全部-001")
-                .with_variables(**{})
-                .post("/orderManagement/queryOrderListInFront")
-                .with_headers(
+            .with_variables(**{})
+            .post("/orderManagement/queryOrderListInFront")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "os":"min",
                     "memberId":2494,
@@ -33,28 +33,28 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "view":"ALL",
                     "page":0,
                     "size":10
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("订单列表-待付款-002")
-                .with_variables(**{})
-                .post("/orderManagement/queryOrderListInFront")
-                .with_headers(
+            .with_variables(**{})
+            .post("/orderManagement/queryOrderListInFront")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "os":"min",
                     "memberId":2494,
@@ -64,28 +64,28 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "view":"WAIT_PAY",
                     "page":0,
                     "size":10
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("订单列表-待接单-003")
-                .with_variables(**{})
-                .post("/orderManagement/queryOrderListInFront")
-                .with_headers(
+            .with_variables(**{})
+            .post("/orderManagement/queryOrderListInFront")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "os":"min",
                     "memberId":"${ENV(memberId)}",
@@ -95,28 +95,28 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "view":"SELLER_AFFIRM",
                     "page":0,
                     "size":10
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("订单列表-待自提-004")
-                .with_variables(**{})
-                .post("/orderManagement/queryOrderListInFront")
-                .with_headers(
+            .with_variables(**{})
+            .post("/orderManagement/queryOrderListInFront")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "os":"min",
                     "memberId":2494,
@@ -126,28 +126,28 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "view":"WAIT_SELF",
                     "page":0,
                     "size":10
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         ),
         Step(
             RunRequest("订单列表-已完成-005")
-                .with_variables(**{})
-                .post("/orderManagement/queryOrderListInFront")
-                .with_headers(
+            .with_variables(**{})
+            .post("/orderManagement/queryOrderListInFront")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_params(
+            .with_params(
                 **{
                     "os":"min",
                     "memberId":2494,
@@ -157,16 +157,16 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "view":"FINISHED",
                     "page":0,
                     "size":10
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

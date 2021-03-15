@@ -15,9 +15,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("查询店铺分类-001")
-                .with_variables(**{})
-                .get("/proVendorCategory/findTree")
-                .with_params(
+            .with_variables(**{})
+            .get("/proVendorCategory/findTree")
+            .with_params(
                 **{
                     "memberId":"${ENV(memberId)}",
                     "userId":"${ENV(memberId)}",
@@ -26,9 +26,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

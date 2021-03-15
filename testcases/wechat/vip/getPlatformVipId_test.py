@@ -15,12 +15,12 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("根据user_id查询VIP信息")
-                .with_variables(**{})
-                .get("/vip/getPlatformVipId")
-                .with_params(**{"user_id":"${ENV(memberId)}"})
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .with_variables(**{})
+            .get("/vip/getPlatformVipId")
+            .with_params(**{"user_id":"${ENV(memberId)}"})
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

@@ -15,23 +15,23 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("根据商品查优惠券-001")
-                .with_variables(**{})
-                .post("/vendor/createCoupon")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendor/createCoupon")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "quantity":1,
                     "couponTypeId":"863621998054514688"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 

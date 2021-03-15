@@ -15,9 +15,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("获取商家用户角色-001")
-                .with_variables(**{})
-                .get("/vendorRegister/getUserVendorRoleByUserId")
-                .with_params(
+            .with_variables(**{})
+            .get("/vendorRegister/getUserVendorRoleByUserId")
+            .with_params(
                 **{
                     "userId":"${ENV(sellerId)}",
                     "memberId":"${ENV(sellerId)}",
@@ -26,9 +26,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorId":"${ENV(vendorId)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.msg","success")
         )
     ]
 
