@@ -1,32 +1,29 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/11 19:23'
+__date__ = '2021/3/15 17:31'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("登录")
+        Config("获取优惠券类型")
             .variables(**{})
-            .base_url("${ENV(base_url_ui_online)}")
+            .base_url("${ENV(base_url_vendor_online)}")
             .verify(False)
             .export(*[])
     )
     teststeps = [
         Step(
-            RunRequest("登录-001")
+            RunRequest("获取优惠券类型-001")
             .with_variables(**{})
-            .post("/users/loginCheck")
-            .with_headers(
+            .get("/vendorCoupon/getCouponEnums")
+            .with_params(
                 **{
-                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
-                    "Content-Type":"application/x-www-form-urlencoded",
-                }
-            )
-            .with_data(
-                {
-                    "account": "18000000003",
-                    "password": "123456"
+                    "memberId":"${ENV(memberId)}",
+                    "userId":"${ENV(memberId)}",
+                    "vendorId":"${ENV(vendorId)}",
+                    "depotCode":"${ENV(vendorCode)}",
+                    "vendorCode":"${ENV(vendorCode)}"
                 }
             )
             .validate()

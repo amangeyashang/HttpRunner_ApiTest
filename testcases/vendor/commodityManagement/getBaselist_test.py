@@ -1,34 +1,29 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/11 19:23'
+__date__ = '2021/3/15 15:30'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("登录")
+        Config("商品库详情")
             .variables(**{})
-            .base_url("${ENV(base_url_ui_online)}")
+            .base_url("${ENV(base_url_vendor_online)}")
             .verify(False)
             .export(*[])
     )
     teststeps = [
         Step(
-            RunRequest("登录-001")
+            RunRequest("商品库详情-001")
             .with_variables(**{})
-            .post("/users/loginCheck")
+            .post("/vendorProduct/getBaselist")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
-                    "Content-Type":"application/x-www-form-urlencoded",
+                    "Content-Type":"application/json",
                 }
             )
-            .with_data(
-                {
-                    "account": "18000000003",
-                    "password": "123456"
-                }
-            )
+            .with_json({})
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")
