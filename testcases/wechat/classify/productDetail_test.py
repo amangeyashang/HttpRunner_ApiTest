@@ -26,7 +26,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .with_json(
                 {
                     "depotCode": "${ENV(vendorCode)}",
-                    "productCode": "PD19123000000009",
+                    "productCode": "${ENV(productCode)}",
                 }
             )
             .validate()

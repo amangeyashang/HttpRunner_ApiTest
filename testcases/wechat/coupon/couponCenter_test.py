@@ -31,7 +31,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .validate()
             .assert_equal("status_code",200)
-            .assert_equal("body.msg","success")
+            .assert_equal("body.msg","领取成功")
         )
     ]
 

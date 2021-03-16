@@ -26,7 +26,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .with_json(
                 {
                     "orderCode":"SOHGSPRO21031000008",
-                    "summaryOrder":true,
+                    "summaryOrder":'true',
                     "channel":"APP"
                 }
             )

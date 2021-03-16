@@ -26,7 +26,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .with_json(
                 {
                     "couponChannelType":"UNIVERSAL",
-                    "productCode":"PD21030100000223"
+                    "productCode":"${ENV(productCode)}"
                 }
             )
             .validate()

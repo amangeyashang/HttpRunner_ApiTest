@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/15 18:13'
+__date__ = '2021/3/16 9:57'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("VIP会员变更记录查询")
+        Config("获取店铺首页模版列表")
             .variables(**{})
             .base_url("${ENV(base_url_vendor_online)}")
             .verify(False)
@@ -14,28 +14,18 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunRequest("VIP会员变更记录查询-001")
+            RunRequest("获取店铺首页模版列表-001")
             .with_variables(**{})
-            .post("/vendorVip/listPlatformVipChangeDetailedByPage")
+            .post("/vendorIndexApiService/getTemplate")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-            .with_json(
-                {
-                    "isState":'null',
-                    "page":1,
-                    "size":10,
-                    "startTime":'null',
-                    "vipCode":'null',
-                    "memberId":"${ENV(memberId)}",
-                    "userId":"${ENV(memberId)}",
-                    "vendorId":"${ENV(vendorId)}",
-                    "depotCode":"${ENV(vendorCode)}",
-                    "vendorCode":"${ENV(vendorCode)}",
-                    "vipVendorId":"${ENV(vendorId)}"
+            .with_params(
+                **{
+                    "vendorCode":"${ENV(vendorCode)}"
                 }
             )
             .validate()

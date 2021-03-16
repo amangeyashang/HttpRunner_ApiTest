@@ -16,15 +16,22 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
         Step(
             RunRequest("购物车列表-001")
             .with_variables(**{})
-            .post("/indexApiService/getPopup")
+            .post("/cart/getShopCartInfo")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
+            .with_params(
+                **{
+                    "vendorCode":"${ENV(vendorCode)}"
+                }
+            )
             .with_json(
                 {
+                    "memberId":"${ENV(memberId)}",
+                    "channel":"WECHAT",
                     "depotCode":"${ENV(vendorCode)}"
                 }
             )

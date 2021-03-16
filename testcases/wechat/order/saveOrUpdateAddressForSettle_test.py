@@ -1,41 +1,42 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/15 18:13'
+__date__ = '2021/3/16 20:01'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("VIP会员变更记录查询")
+        Config("保存或更新地址")
             .variables(**{})
-            .base_url("${ENV(base_url_vendor_online)}")
+            .base_url("${ENV(base_url_wechat_online)}")
             .verify(False)
             .export(*[])
     )
     teststeps = [
         Step(
-            RunRequest("VIP会员变更记录查询-001")
+            RunRequest("保存或更新地址-001")
             .with_variables(**{})
-            .post("/vendorVip/listPlatformVipChangeDetailedByPage")
+            .post("/users/address/new/saveOrUpdateAddressForSettle")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
+            .with_params(
+                **{
+                    "memberId":"${ENV(memberId)}",
+                    "lat":28.45362,
+                    "lon":109.006128,
+                    "userToken":"684f2aa256a6408980cbb1f56602e250",
+                    "vendorCode":"${ENV(vendorCode)}"
+                }
+            )
             .with_json(
                 {
-                    "isState":'null',
-                    "page":1,
-                    "size":10,
-                    "startTime":'null',
-                    "vipCode":'null',
-                    "memberId":"${ENV(memberId)}",
-                    "userId":"${ENV(memberId)}",
-                    "vendorId":"${ENV(vendorId)}",
-                    "depotCode":"${ENV(vendorCode)}",
-                    "vendorCode":"${ENV(vendorCode)}",
-                    "vipVendorId":"${ENV(vendorId)}"
+                    "id": "71",
+                    "consigneeName": "总部员工",
+                    "mobile": "18716280028"
                 }
             )
             .validate()

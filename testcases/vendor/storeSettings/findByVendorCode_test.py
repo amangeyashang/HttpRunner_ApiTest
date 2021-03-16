@@ -1,31 +1,25 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/10 17:54'
+__date__ = '2021/3/16 10:16'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("获取带参小程序二维码")
+        Config("查询商家弹窗配置")
             .variables(**{})
-            .base_url("${ENV(base_url_wechat_online)}")
+            .base_url("${ENV(base_url_vendor_online)}")
             .verify(False)
             .export(*[])
     )
     teststeps = [
         Step(
-            RunRequest("获取带参小程序二维码-001")
+            RunRequest("查询商家弹窗配置-001")
             .with_variables(**{})
-            .get("/weChat/getMinTwoDimensionaCode")
+            .get("/venPackingChargesConfig/findByVendorCode")
             .with_params(
                 **{
-                    "os":"min",
-                    "memberId":"${ENV(memberId)}",
-                    "lat":29.71797999388022,
-                    "lon":106.63042999999999,
-                    "userToken":"92b792df1b304a8d937d8119a4e50f3f",
-                    "vendorCode":"${ENV(vendorCode)}",
-                    "minPath":"18716280028,VC10003,U"
+                    "vendorCode":"${ENV(vendorCode)}"
                 }
             )
             .validate()

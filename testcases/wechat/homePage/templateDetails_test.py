@@ -4,16 +4,21 @@ __date__ = '2021/3/5 10:58'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 
+from .getTemplate_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)#导入引用的类
+
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
         Config("获取模版详情")
-            .variables(**{})
             .base_url("${ENV(base_url_wechat_online)}")
             .verify(False)
-            .export(*[])
     )
     teststeps = [
+        Step(
+            RunTestCase("request with functions")
+            .call(RequestWithFunctions)#导入后就可以调用了
+            .export(*["templateId1","templateType1"])#在RunTestCase步骤中定义这个变量的导出
+        ),
         Step(
             RunRequest("获取模板详情-001")
             .with_variables(**{})

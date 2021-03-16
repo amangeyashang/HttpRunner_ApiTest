@@ -33,7 +33,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                         [
                             {
                                 "depotCode":"${ENV(vendorCode)}",
-                                "productCode":"PD21010400000001",
+                                "productCode":"${ENV(productCode)}",
                                 "quantity":1
                             }
                         ],
@@ -44,7 +44,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                             {
                                 "depotCode":"${ENV(vendorCode)}",
                                 "selectedCouponId":"864618667424419840",
-                                "selectedPromotionId":null
+                                "selectedPromotionId":'null'
                             }
                         ]
                 }

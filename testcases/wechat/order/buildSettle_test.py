@@ -40,12 +40,12 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                         [
                             {
                                 "depotCode":"${ENV(vendorCode)}",
-                                "productCode":"PD19112500000021",
+                                "productCode":"${ENV(productCode)}",
                                 "quantity":1
                             }
                         ],
                     "orderClient":"wechat",
-                    "userId":2494
+                    "userId":"${ENV(memberId)}"
                 }
             )
             .validate()

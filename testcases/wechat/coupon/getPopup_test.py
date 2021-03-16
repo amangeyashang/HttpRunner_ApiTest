@@ -28,13 +28,12 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .with_json(
                 {
                     "vendorId": "${ENV(vendorId)}",
-                    "vendorCode": "${ENV(vendorCode)}",
-                    "userId": "${ENV(memberId)}"
+                    "vendorCode": "${ENV(vendorCode)}"
                 }
             )
             .validate()
             .assert_equal("status_code",200)
-            .assert_equal("body.msg","领取成功")
+            .assert_equal("body.msg","success")
         )
     ]
 
