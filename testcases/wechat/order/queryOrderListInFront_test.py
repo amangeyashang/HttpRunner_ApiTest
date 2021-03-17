@@ -16,7 +16,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
         Step(
             RunRequest("订单列表-全部-001")
             .with_variables(**{})
-            .post("/orderManagement/queryOrderListInFront")
+            .post("/order/queryOrderListInFront")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",

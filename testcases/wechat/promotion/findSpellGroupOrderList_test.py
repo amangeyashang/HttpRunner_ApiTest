@@ -26,7 +26,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .with_json(
                 {
                     "groupState":"ALL",
-                    "memberId":2494,
+                    "memberId":"${ENV(memberId)}",
                     "searchPageVo":
                         {
                             "pageIndex":1,
@@ -51,7 +51,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .with_json(
                 {
                     "groupState":"GROUP_ING",
-                    "memberId":2494,
+                    "memberId":"${ENV(memberId)}",
                     "searchPageVo":
                         {
                             "pageIndex":1,
@@ -76,7 +76,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .with_json(
                 {
                     "groupState":"GROUP_SUCCESS",
-                    "memberId":2494,
+                    "memberId":"${ENV(memberId)}",
                     "searchPageVo":
                         {
                             "pageIndex":1,

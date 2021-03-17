@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/10 10:28'
+__date__ = '2021/3/17 14:41'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
-from .createOrder_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
+
     config = (
-        Config("订单详情")
+        Config("更新用户信息")
             .variables(**{})
             .base_url("${ENV(base_url_wechat_online)}")
             .verify(False)
@@ -14,14 +14,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunTestCase("request with functions")
-            .call(RequestWithFunctions)
-            .export(*["summaryOrderCode"])
-        ),
-        Step(
-            RunRequest("订单详情-001")
+            RunRequest("更新用户信息-001")
             .with_variables(**{})
-            .post("/order/queryByOrderCode")
+            .post("/users/updateinfo")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -32,16 +27,18 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                 **{
                     "os":"min",
                     "memberId":"${ENV(memberId)}",
-                    "lat":29.71797999388022,
-                    "lon":106.63042999999999,
-                    "userToken":"f9f642a276f74c4f86f57b94f95e09ee",
-                    "vendorCode":"${ENV(vendorCode)}",
+                    "lat":28.45362,
+                    "lon":109.006128,
+                    "userToken":"684f2aa256a6408980cbb1f56602e250",
+                    "vendorCode":"${ENV(vendorCode)}"
                 }
             )
             .with_json(
                 {
-                    "orderCode":"$summaryOrderCode",
-                    "state":"new"
+                    "nickName":"等风、",
+                    "sex":"male",
+                    "email":"10086@qq.com",
+                    "birthday":"2020-03-18"
                 }
             )
             .validate()

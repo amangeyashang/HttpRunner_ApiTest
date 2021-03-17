@@ -16,7 +16,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
         Step(
             RunRequest("删除订单-001")
             .with_variables(**{})
-            .get("/orderManagement/deleteOrder")
+            .get("/order/deleteOrder")
             .with_params(
                 **{
                     "os":"min",

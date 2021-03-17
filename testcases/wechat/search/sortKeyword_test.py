@@ -23,7 +23,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "Content-Type":"application/json"
                 }
             )
-            .with_json({})
+            .with_json({""})
             .validate()
             .assert_equal("status_code",200)
         )

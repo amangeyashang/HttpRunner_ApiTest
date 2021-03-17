@@ -10,7 +10,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .variables(**{})
             .base_url("${ENV(base_url_wechat_online)}")
             .verify(False)
-            .export(*[])
+            .export(*["summaryOrderCode"])
     )
     teststeps = [
         Step(
@@ -49,6 +49,8 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                         ]
                 }
             )
+            .extract()
+            .with_jmespath("body.data.summaryOrderCode","summaryOrderCode")
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")

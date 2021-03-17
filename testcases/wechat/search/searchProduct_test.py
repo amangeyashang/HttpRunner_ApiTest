@@ -25,19 +25,12 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "memberId":"${ENV(memberId)}",
-                    "categoryId":"199",
-                    "categoryLv":"2",
-                    "couponId":"",
-                    "coupon":"",
-                    "promotionId":"",
-                    "promotionType":'null',
-                    "depotProduct":True,
-                    "depotCode":"${ENV(vendorCode)}",
-                    "sort":"DEFAULT_SORT",
+                    "appChannel":"ALL",
+                    "keyword":"蓝莓",
                     "page":-2,
-                    "searchType":"PRODUCT",
-                    "type":0
+                    "pageSize":20,
+                    "type":0,
+                    "depotCode":"${ENV(vendorCode)}"
                 }
             )
             .validate()

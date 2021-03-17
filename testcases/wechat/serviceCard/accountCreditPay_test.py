@@ -46,8 +46,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .validate()
             .assert_equal("status_code",200)
-            .assert_equal("body.message","成功")
-            .assert_equal("body.status","S")
+            .assert_equal("body.msg","success")
         )
     ]
 

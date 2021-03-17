@@ -3,6 +3,7 @@ _author_ = 'Leo'
 __date__ = '2021/3/10 9:54'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from .createOrder_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -14,9 +15,14 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
+            RunTestCase("request with functions")
+            .call(RequestWithFunctions)
+            .export(*["summaryOrderCode"])
+        ),
+        Step(
             RunRequest("调用支付接口后订单状态-001")
             .with_variables(**{})
-            .post("/orderManagement/orderPayState")
+            .post("/order/orderPayState")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -25,7 +31,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "orderCode":"SOHGSPRO21031000008",
+                    "orderCode":"$summaryOrderCode",
                     "summaryOrder":'true',
                     "channel":"APP"
                 }
