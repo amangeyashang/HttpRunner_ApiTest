@@ -14,7 +14,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunRequest("拼团订单列表-全部-001")
+            RunRequest("拼团订单列表-001")
             .with_variables(**{})
             .post("/spellGroup/findSpellGroupOrderList")
             .with_headers(
@@ -23,90 +23,20 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "Content-Type":"application/json",
                 }
             )
-            .with_json(
-                {
-                    "groupState":"ALL",
-                    "memberId":"${ENV(memberId)}",
-                    "searchPageVo":
-                        {
-                            "pageIndex":1,
-                            "pageSize":10
-                        }
-                }
-            )
-            .validate()
-            .assert_equal("status_code",200)
-            .assert_equal("body.msg","success")
-        ),
-        Step(
-            RunRequest("拼团订单列表-拼团中-002")
-            .with_variables(**{})
-            .post("/spellGroup/findSpellGroupOrderList")
-            .with_headers(
+            .with_params(
                 **{
-                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
-                    "Content-Type":"application/json",
+                    "os":"min",
+                    "memberId":"${ENV(memberId)}",
+                    "lat":"29.71797999388022",
+                    "lon":"106.63042999999999",
+                    "userToken":"c857660825954391ab036eed074861ad",
+                    "vendorCode":"${ENV(vendorCode)}"
                 }
             )
             .with_json(
                 {
-                    "groupState":"GROUP_ING",
-                    "memberId":"${ENV(memberId)}",
-                    "searchPageVo":
-                        {
-                            "pageIndex":1,
-                            "pageSize":10
-                        }
-                }
-            )
-            .validate()
-            .assert_equal("status_code",200)
-            .assert_equal("body.msg","success")
-        ),
-        Step(
-            RunRequest("拼团订单列表-拼团成功-003")
-            .with_variables(**{})
-            .post("/spellGroup/findSpellGroupOrderList")
-            .with_headers(
-                **{
-                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
-                    "Content-Type":"application/json",
-                }
-            )
-            .with_json(
-                {
-                    "groupState":"GROUP_SUCCESS",
-                    "memberId":"${ENV(memberId)}",
-                    "searchPageVo":
-                        {
-                            "pageIndex":1,
-                            "pageSize":10
-                        }
-                }
-            )
-            .validate()
-            .assert_equal("status_code",200)
-            .assert_equal("body.msg","success")
-        ),
-        Step(
-            RunRequest("拼团订单列表-拼团失败-004")
-            .with_variables(**{})
-            .post("/spellGroup/findSpellGroupOrderList")
-            .with_headers(
-                **{
-                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
-                    "Content-Type":"application/json",
-                }
-            )
-            .with_json(
-                {
-                    "groupState":"GROUP_FAIL",
-                    "memberId":"${ENV(memberId)}",
-                    "searchPageVo":
-                        {
-                            "pageIndex":1,
-                            "pageSize":10
-                        }
+                    "vendorCode":"${ENV(vendorCode)}",
+                    "productCode":"PD20112000000015"
                 }
             )
             .validate()

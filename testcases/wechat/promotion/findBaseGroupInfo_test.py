@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/9 16:50'
+__date__ = '2021/3/22 11:30'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("获取用户信息")
+        Config("拼团详情")
             .variables(**{})
             .base_url("${ENV(base_url_wechat_online)}")
             .verify(False)
@@ -14,17 +14,24 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunRequest("获取用户信息-001")
+            RunRequest("拼团详情-001")
             .with_variables(**{})
-            .get("/users/getMemberInfo")
+            .get("/spellGroup/findBaseGroupInfo")
+            .with_headers(
+                **{
+                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
+                    "Content-Type":"application/json",
+                }
+            )
             .with_params(
                 **{
                     "os":"min",
                     "memberId":"${ENV(memberId)}",
-                    "lat":28.45362,
-                    "lon":109.006128,
-                    "userToken":"684f2aa256a6408980cbb1f56602e250",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "lat":"29.71797999388022",
+                    "lon":"106.63042999999999",
+                    "userToken":"c857660825954391ab036eed074861ad",
+                    "vendorCode":"${ENV(vendorCode)}",
+                    "baseId":"826994780838891520"
                 }
             )
             .validate()
