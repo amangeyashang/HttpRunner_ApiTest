@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/9 17:37'
+__date__ = '2021/3/23 15:54'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("根据商品查优惠券")
+        Config("生成预存赠品订单")
             .variables(**{})
             .base_url("${ENV(base_url_wechat_online)}")
             .verify(False)
@@ -14,34 +14,35 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunRequest("根据商品查优惠券-001")
-            .with_variables(**{})
-            .post("/vendor/createCoupon")
-            .with_headers(
+            RunRequest("生成预存赠品订单-001")
+                .with_variables(**{})
+                .post("/promotion/preDeposit/orderPreDeposit")
+                .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-            .with_params(
+                .with_params(
                 **{
                     "os":"min",
                     "memberId":"${ENV(memberId)}",
-                    "lat":"29.71797999388022",
-                    "lon":"106.63042999999999",
-                    "userToken":"c857660825954391ab036eed074861ad",
+                    "lat":28.45362,
+                    "lon":109.006128,
+                    "userToken":"684f2aa256a6408980cbb1f56602e250",
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-            .with_json(
+                .with_json(
                 {
-                    "quantity":1,
-                    "couponTypeId":"870124354531287040"
+                    "bizNo":"20201231PT9399053436",
+                    "clientType":"wechat"
                 }
             )
-            .validate()
-            .assert_equal("status_code",200)
-            .assert_equal("body.msg","超过优惠券限领数量")
+                .validate()
+                .assert_equal("status_code",200)
+                .assert_equal("body.message","预存活动订单流水不在预期状态")
+                .assert_equal("body.status","F")
         )
     ]
 

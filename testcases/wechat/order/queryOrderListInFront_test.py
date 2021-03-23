@@ -47,7 +47,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
         Step(
             RunRequest("订单列表-待付款-002")
             .with_variables(**{})
-            .post("/orderManagement/queryOrderListInFront")
+            .post("/order/queryOrderListInFront")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -78,7 +78,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
         Step(
             RunRequest("订单列表-待接单-003")
             .with_variables(**{})
-            .post("/orderManagement/queryOrderListInFront")
+            .post("/order/queryOrderListInFront")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -109,7 +109,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
         Step(
             RunRequest("订单列表-待自提-004")
             .with_variables(**{})
-            .post("/orderManagement/queryOrderListInFront")
+            .post("/order/queryOrderListInFront")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -140,7 +140,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
         Step(
             RunRequest("订单列表-已完成-005")
             .with_variables(**{})
-            .post("/orderManagement/queryOrderListInFront")
+            .post("/order/queryOrderListInFront")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
