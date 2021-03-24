@@ -10,7 +10,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .variables(**{})
             .base_url("${ENV(base_url_vendor_online)}")
             .verify(False)
-            .export(*[])
+            .export(*["orderCode"])
     )
     teststeps = [
         Step(
@@ -212,6 +212,8 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
+            .extract()
+            .with_jmespath("body.data.content[0].orderCode","orderCode")
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")

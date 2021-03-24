@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/15 17:46'
+__date__ = '2021/3/23 19:34'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("特价列表")
+        Config("商家优惠券发放列表")
             .variables(**{})
             .base_url("${ENV(base_url_vendor_online)}")
             .verify(False)
@@ -14,9 +14,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunRequest("简单特价列表-001")
+            RunRequest("商家优惠券发放列表-001")
             .with_variables(**{})
-            .post("/vendor/specialOffer/specialOfferList")
+            .post("/vendorCoupon/couponIssue/vendorCouponIssuePage")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -25,10 +25,10 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
+                    "userMobile":"",
+                    "couponTypeEnumStr":"",
                     "page":1,
                     "size":10,
-                    "promotionActivity":"ALL",
-                    "name":"",
                     "memberId":"${ENV(memberId)}",
                     "userId":"${ENV(memberId)}",
                     "vendorId":"${ENV(vendorId)}",
@@ -38,7 +38,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .validate()
             .assert_equal("status_code",200)
-            .assert_equal("body.msg","success")
+            .assert_equal("body.msg","没有相关数据！")
         )
     ]
 

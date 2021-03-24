@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/15 17:40'
+__date__ = '2021/3/23 20:18'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("已领取优惠券")
+        Config("天天特价详情")
             .variables(**{})
             .base_url("${ENV(base_url_vendor_online)}")
             .verify(False)
@@ -14,14 +14,12 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunRequest("已领取优惠券-001")
+            RunRequest("天天特价详情-001")
             .with_variables(**{})
-            .get("/vendorCoupon/couponUsed/page")
+            .get("/vendor/specialOffer/edit")
             .with_params(
                 **{
-                    "page":1,
-                    "size":10,
-                    "couponId":"",
+                    "id":"862896742385872896",
                     "memberId":"${ENV(memberId)}",
                     "userId":"${ENV(memberId)}",
                     "vendorId":"${ENV(vendorId)}",

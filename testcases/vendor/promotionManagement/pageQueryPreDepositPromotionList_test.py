@@ -15,18 +15,17 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunRequest("预存活动列表-001")
-                .with_variables(**{})
-                .post("/vendor/preDeposit/pageQueryPreDepositPromotion")
-                .with_headers(
+            .with_variables(**{})
+            .post("/vendor/preDeposit/pageQueryPreDepositPromotion")
+            .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
                     "Content-Type":"application/json",
                 }
             )
-                .with_json(
+            .with_json(
                 {
                     "pageInfo":{"pageNo":1,"pageSize":10},
-                    "status":'null',
                     "name":"",
                     "memberId":"${ENV(memberId)}",
                     "userId":"${ENV(memberId)}",
@@ -35,9 +34,10 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-                .validate()
-                .assert_equal("status_code",200)
-                .assert_equal("body.msg","success")
+            .validate()
+            .assert_equal("status_code",200)
+            .assert_equal("body.message","成功")
+            .assert_equal("body.status","S")
         )
     ]
 

@@ -1,12 +1,13 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/15 17:46'
+__date__ = '2021/3/23 17:49'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from .queryOrderListBySeller_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("特价列表")
+        Config("删除订单")
             .variables(**{})
             .base_url("${ENV(base_url_vendor_online)}")
             .verify(False)
@@ -14,28 +15,24 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunRequest("简单特价列表-001")
+            RunTestCase("request with functions")
+                .call(RequestWithFunctions)
+                .export(*["orderCode"])
+        ),
+        Step(
+            RunRequest("删除订单-001")
             .with_variables(**{})
-            .post("/vendor/specialOffer/specialOfferList")
-            .with_headers(
+            .get("/vendorOrder/deleteOrder")
+            .with_params(
                 **{
-                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
-                    "Content-Type":"application/json",
-                }
-            )
-            .with_json(
-                {
-                    "page":1,
-                    "size":10,
-                    "promotionActivity":"ALL",
-                    "name":"",
+                    "orderCode":"$orderCode",
                     "memberId":"${ENV(memberId)}",
                     "userId":"${ENV(memberId)}",
                     "vendorId":"${ENV(vendorId)}",
                     "depotCode":"${ENV(vendorCode)}",
                     "vendorCode":"${ENV(vendorCode)}"
                 }
-            )
+        )
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")
