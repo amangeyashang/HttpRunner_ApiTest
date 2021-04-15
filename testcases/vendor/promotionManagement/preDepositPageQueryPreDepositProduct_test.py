@@ -1,27 +1,29 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/16 10:08'
+__date__ = '2021/3/23 20:49'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 from testcases.vendor.userControl.getMemberId_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
+from .preDepositPageQueryPreDepositPromotion_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("获取精选商品列表")
+        Config("充值赠送详情")
             .variables(**{})
             .base_url("${ENV(base_url_vendor_develop_vendor)}")
             .verify(False)
+            .export(*[])
     )
     teststeps = [
         Step(
             RunTestCase("导出变量")
             .call(RequestWithFunctions)
-            .export(*["vendorCode","sellerId","vendorId"])
+            .export(*["vendorCode","sellerId","vendorId","preDepositId"])
         ),
         Step(
-            RunRequest("获取精选商品列表-001")
+            RunRequest("充值赠送详情-001")
             .with_variables(**{})
-            .post("/vendorIndexApiService/getVendorFeaturedProducts")
+            .post("/vendor/preDeposit/pageQueryPreDepositProduct")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -30,18 +32,18 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "page":1,
-                    "size":10,
-                    "memberId":"$memberId",
-                    "userId":"$memberId",
+                    "promotionId":"$preDepositId",
+                    "memberId":"$sellerId",
+                    "userId":"$sellerId",
                     "vendorId":"$vendorId",
                     "depotCode":"$vendorCode",
-                    "vendorCode":"$vendorCode",
+                    "vendorCode":"$vendorCode"
                 }
             )
             .validate()
             .assert_equal("status_code",200)
-            .assert_equal("body.msg","success")
+            .assert_equal("body.message","成功")
+            .assert_equal("body.status","S")
         )
     ]
 

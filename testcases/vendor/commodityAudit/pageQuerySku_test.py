@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/23 20:49'
+__date__ = '2021/4/13 11:47'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("充值赠送详情")
+        Config("分页查询Sku")
             .variables(**{})
             .base_url("${ENV(base_url_vendor_online)}")
             .verify(False)
@@ -14,9 +14,9 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunRequest("充值赠送详情-001")
+            RunRequest("分页查询Sku-001")
             .with_variables(**{})
-            .post("/vendor/preDeposit/pageQueryPreDepositProduct")
+            .post("/sku/pageQuerySku")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -25,7 +25,12 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "promotionId":"7",
+                    "spuCode":"",
+                    "skuCode":"",
+                    "barCode":"",
+                    "createTimeBegin":"",
+                    "createTimeEnd":"",
+                    "pageInfo":{"pageNo":1,"pageSize":10,"total":0},
                     "memberId":"${ENV(memberId)}",
                     "userId":"${ENV(memberId)}",
                     "vendorId":"${ENV(vendorId)}",

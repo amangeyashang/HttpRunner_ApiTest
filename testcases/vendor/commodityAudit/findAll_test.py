@@ -1,36 +1,37 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/11 19:23'
+__date__ = '2021/4/13 16:42'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("登录")
+        Config("查找所有品牌")
             .variables(**{})
-            .base_url("${ENV(base_url_ui_online)}")
+            .base_url("${ENV(base_url_vendor_online)}")
             .verify(False)
-            .export(*["sessionId"])
+            .export(*[])
     )
     teststeps = [
         Step(
-            RunRequest("登录-001")
+            RunRequest("查找所有品牌-001")
             .with_variables(**{})
-            .post("/users/loginCheck")
+            .post("/vendorProduct/findAll")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
-                    "Content-Type":"application/x-www-form-urlencoded",
+                    "Content-Type":"application/json",
                 }
             )
-            .with_data(
+            .with_json(
                 {
-                    "account":"18000000003",
-                    "password":"123456"
+                    "memberId":"${ENV(memberId)}",
+                    "userId":"${ENV(memberId)}",
+                    "vendorId":"${ENV(vendorId)}",
+                    "depotCode":"${ENV(vendorCode)}",
+                    "vendorCode":"${ENV(vendorCode)}"
                 }
             )
-            .extract()
-            .with_jmespath("body.data.sessionId","sessionId")
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")

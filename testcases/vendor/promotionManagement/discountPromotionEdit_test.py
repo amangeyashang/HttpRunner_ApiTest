@@ -3,28 +3,35 @@ _author_ = 'Leo'
 __date__ = '2021/3/23 20:36'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.vendor.userControl.getMemberId_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
+from .discountList_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
         Config("折扣促销详情")
             .variables(**{})
-            .base_url("${ENV(base_url_vendor_online)}")
+            .base_url("${ENV(base_url_vendor_develop_vendor)}")
             .verify(False)
             .export(*[])
     )
     teststeps = [
+        Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["vendorCode","sellerId","vendorId","promotionId"])
+        ),
         Step(
             RunRequest("折扣促销详情-001")
             .with_variables(**{})
             .get("/vendor/discountPromotion/edit")
             .with_params(
                 **{
-                    "id":"840433768404692992",
-                    "memberId":"${ENV(memberId)}",
-                    "userId":"${ENV(memberId)}",
-                    "vendorId":"${ENV(vendorId)}",
-                    "depotCode":"${ENV(vendorCode)}",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "id":"$promotionId",
+                    "memberId":"$sellerId",
+                    "userId":"$sellerId",
+                    "vendorId":"$vendorId",
+                    "depotCode":"$vendorCode",
+                    "vendorCode":"$vendorCode"
                 }
             )
             .validate()

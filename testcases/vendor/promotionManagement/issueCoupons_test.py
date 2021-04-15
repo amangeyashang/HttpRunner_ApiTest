@@ -1,16 +1,17 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/16 10:08'
+__date__ = '2021/4/14 16:02'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 from testcases.vendor.userControl.getMemberId_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("获取精选商品列表")
+        Config("发放优惠券")
             .variables(**{})
             .base_url("${ENV(base_url_vendor_develop_vendor)}")
             .verify(False)
+            .export(*[])
     )
     teststeps = [
         Step(
@@ -19,26 +20,24 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .export(*["vendorCode","sellerId","vendorId"])
         ),
         Step(
-            RunRequest("获取精选商品列表-001")
+            RunRequest("发放优惠券-001")
             .with_variables(**{})
-            .post("/vendorIndexApiService/getVendorFeaturedProducts")
-            .with_headers(
+            .get("/vendorCoupon/issueCoupons")
+            .with_params(
                 **{
-                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
-                    "Content-Type":"application/json",
-                }
-            )
-            .with_json(
-                {
+                    "couponTypeName":"",
                     "page":1,
-                    "size":10,
-                    "memberId":"$memberId",
-                    "userId":"$memberId",
+                    "size":5,
+                    "memberId":"$sellerId",
+                    "userId":"$sellerId",
                     "vendorId":"$vendorId",
                     "depotCode":"$vendorCode",
-                    "vendorCode":"$vendorCode",
+                    "vendorCode":"$vendorCode"
                 }
             )
+            .extract()
+            .with_jmespath("body.data.content[0].id","couponTypeId")
+            .with_jmespath("body.data.content[0].couponTypeName","couponTypeName")
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")

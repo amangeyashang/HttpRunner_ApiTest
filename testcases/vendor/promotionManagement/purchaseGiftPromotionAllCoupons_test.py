@@ -1,16 +1,17 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/16 10:08'
+__date__ = '2021/4/15 10:15'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 from testcases.vendor.userControl.getMemberId_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("获取精选商品列表")
+        Config("买赠满赠查找优惠券")
             .variables(**{})
             .base_url("${ENV(base_url_vendor_develop_vendor)}")
             .verify(False)
+            .export(*[])
     )
     teststeps = [
         Step(
@@ -19,24 +20,16 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .export(*["vendorCode","sellerId","vendorId"])
         ),
         Step(
-            RunRequest("获取精选商品列表-001")
+            RunRequest("买赠满赠查找优惠券-001")
             .with_variables(**{})
-            .post("/vendorIndexApiService/getVendorFeaturedProducts")
-            .with_headers(
+            .get("/vendor/purchaseGiftPromotion/allCoupons")
+            .with_params(
                 **{
-                    "User-Agent":"HttpRunner/${get_httprunner_version()}",
-                    "Content-Type":"application/json",
-                }
-            )
-            .with_json(
-                {
-                    "page":1,
-                    "size":10,
-                    "memberId":"$memberId",
-                    "userId":"$memberId",
+                    "memberId":"$sellerId",
+                    "userId":"$sellerId",
                     "vendorId":"$vendorId",
                     "depotCode":"$vendorCode",
-                    "vendorCode":"$vendorCode",
+                    "vendorCode":"$vendorCode"
                 }
             )
             .validate()
