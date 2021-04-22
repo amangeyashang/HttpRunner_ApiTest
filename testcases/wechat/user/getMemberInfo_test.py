@@ -8,7 +8,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     config = (
         Config("获取用户信息")
             .variables(**{})
-            .base_url("${ENV(base_url_wechat_online)}")
+            .base_url("${ENV(base_url_wechat_develop_rest)}")
             .verify(False)
             .export(*[])
     )
@@ -24,7 +24,6 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":28.45362,
                     "lon":109.006128,
                     "userToken":"684f2aa256a6408980cbb1f56602e250",
-                    "vendorCode":"${ENV(vendorCode)}"
                 }
             )
             .validate()

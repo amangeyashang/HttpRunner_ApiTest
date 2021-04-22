@@ -8,7 +8,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     config = (
         Config("用户账户Account 充值")
             .variables(**{})
-            .base_url("${ENV(base_url_wechat_online)}")
+            .base_url("${ENV(base_url_wechat_develop_rest)}")
             .verify(False)
             .export(*[])
     )

@@ -16,8 +16,8 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     teststeps = [
         Step(
             RunTestCase("导出变量")
-                .call(RequestWithFunctions)
-                .export(*["vendorCode","sellerId","vendorId","couponId"])
+            .call(RequestWithFunctions)
+            .export(*["vendorCode","sellerId","vendorId","couponId"])
         ),
         Step(
             RunRequest("发放优惠券-001")

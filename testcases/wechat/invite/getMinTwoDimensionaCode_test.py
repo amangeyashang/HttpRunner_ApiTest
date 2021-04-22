@@ -8,7 +8,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     config = (
         Config("获取带参小程序二维码")
             .variables(**{})
-            .base_url("${ENV(base_url_wechat_online)}")
+            .base_url("${ENV(base_url_wechat_develop_rest)}")
             .verify(False)
             .export(*[])
     )

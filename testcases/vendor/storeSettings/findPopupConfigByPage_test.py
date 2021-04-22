@@ -26,8 +26,8 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                 **{
                     "page":1,
                     "size":10,
-                    "memberId":"$memberId",
-                    "userId":"$memberId",
+                    "memberId":"$sellerId",
+                    "userId":"$sellerId",
                     "vendorId":"$vendorId",
                     "depotCode":"$vendorCode",
                     "vendorCode":"$vendorCode"

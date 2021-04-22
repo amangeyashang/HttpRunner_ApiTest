@@ -1,22 +1,22 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/15 11:45'
+__date__ = '2021/4/19 14:46'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("商品分润设置列表")
+        Config("查询会员积分")
             .variables(**{})
-            .base_url("${ENV(base_url_vendor_online)}")
+            .base_url("${ENV(base_url_wechat_develop_rest)}")
             .verify(False)
             .export(*[])
     )
     teststeps = [
         Step(
-            RunRequest("商品分润设置列表-001")
+            RunRequest("查询会员积分-001")
             .with_variables(**{})
-            .post("/newVendorProduct/findVendorProdcutListForProductProfit")
+            .post("/users/integral/queryIntegral")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -25,15 +25,13 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "page": 1,
-                    "size": 10,
-                    "saleStatus":"OFF_SALE",
-                    "vendorId": "${ENV(vendorId)}"
+                    "memberId":"${ENV(memberId)}"
                 }
             )
             .validate()
             .assert_equal("status_code",200)
-            .assert_equal("body.msg","success")
+            .assert_equal("body.status","S")
+            .assert_equal("body.message","成功")
         )
     ]
 

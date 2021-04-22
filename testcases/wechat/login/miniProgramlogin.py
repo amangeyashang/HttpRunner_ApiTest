@@ -1,22 +1,22 @@
 # -*- coding:utf-8 -*-
 _author_ = 'Leo'
-__date__ = '2021/3/15 18:13'
+__date__ = '2021/4/19 11:10'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
-        Config("VIP会员变更记录查询")
+        Config("小程序登录")
             .variables(**{})
-            .base_url("${ENV(base_url_vendor_online)}")
+            .base_url("${ENV(base_url_wechat_develop_rest)}")
             .verify(False)
             .export(*[])
     )
     teststeps = [
         Step(
-            RunRequest("VIP会员变更记录查询-001")
+            RunRequest("小程序登录-001")
             .with_variables(**{})
-            .post("/vendorVip/listPlatformVipChangeDetailedByPage")
+            .post("/users/miniProgramlogin")
             .with_headers(
                 **{
                     "User-Agent":"HttpRunner/${get_httprunner_version()}",
@@ -25,17 +25,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "isState":'null',
-                    "page":1,
-                    "size":10,
-                    "startTime":'null',
-                    "vipCode":'null',
-                    "memberId":"${ENV(memberId)}",
-                    "userId":"${ENV(memberId)}",
-                    "vendorId":"${ENV(vendorId)}",
-                    "depotCode":"${ENV(vendorCode)}",
-                    "vendorCode":"${ENV(vendorCode)}",
-                    "vipVendorId":"${ENV(vendorId)}"
+                    "code":"073gUq0003UryL1OH13006lugD4gUq01"
                 }
             )
             .validate()

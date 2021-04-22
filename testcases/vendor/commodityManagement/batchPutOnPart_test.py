@@ -3,16 +3,22 @@ _author_ = 'Leo'
 __date__ = '2021/3/15 16:10'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.vendor.userControl.getMemberId_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
         Config("批量上下架商品")
             .variables(**{})
-            .base_url("${ENV(base_url_vendor_online)}")
+            .base_url("${ENV(base_url_vendor_develop_vendor)}")
             .verify(False)
             .export(*[])
     )
     teststeps = [
+        Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["vendorCode","sellerId","vendorId"])
+        ),
         Step(
             RunRequest("批量上下架商品-下架商品-001")
             .with_variables(**{})
@@ -28,11 +34,11 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "all":'false',
                     "productIds":["694729859712307200","694663830504099840"],
                     "putway":'false',
-                    "vendorId":"546520236057329664",
-                    "memberId":"2501",
-                    "userId":"2501",
-                    "depotCode":"VC10003",
-                    "vendorCode":"VC10003"
+                    "memberId":"$sellerId",
+                    "userId":"$sellerId",
+                    "vendorId":"$vendorId",
+                    "depotCode":"$vendorCode",
+                    "vendorCode":"$vendorCode"
                 }
             )
             .validate()
@@ -54,11 +60,11 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "all":'false',
                     "productIds":["694729859712307200","694663830504099840"],
                     "putway":'true',
-                    "vendorId":"546520236057329664",
-                    "memberId":"2501",
-                    "userId":"2501",
-                    "depotCode":"VC10003",
-                    "vendorCode":"VC10003"
+                    "memberId":"$sellerId",
+                    "userId":"$sellerId",
+                    "vendorId":"$vendorId",
+                    "depotCode":"$vendorCode",
+                    "vendorCode":"$vendorCode"
                 }
             )
                 .validate()

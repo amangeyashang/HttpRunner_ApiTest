@@ -9,7 +9,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     config = (
         Config("调用支付接口后订单状态")
             .variables(**{})
-            .base_url("${ENV(base_url_wechat_online)}")
+            .base_url("${ENV(base_url_wechat_develop_rest)}")
             .verify(False)
             .export(*[])
     )

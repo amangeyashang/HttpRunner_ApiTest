@@ -31,6 +31,8 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"$vendorCode"
                 }
             )
+            .extract()
+            .with_jmespath("body.data.vendorName","vendorName")
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")

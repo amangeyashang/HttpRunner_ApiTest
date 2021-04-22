@@ -10,7 +10,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     config = (
         Config("查询部分店铺")
         .variables(**{})
-        .base_url("${ENV(base_url_wechat_online)}")
+        .base_url("${ENV(base_url_wechat_develop_rest)}")
         .verify(False)
         .export(*[])
     )
@@ -27,11 +27,15 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "latitude": 29.573953975109,
-                    "longitude": 106.55014427358,
-                    "pageSize": 50
+                    "latitude": 28.449297,
+                    "longitude": 109.001855,
+                    "pageSize": 4,
+                    "distance":2
                 }
             )
+            .extract()
+            .with_jmespath("body.data.content[0].depotCode","depotCode")
+            .with_jmespath("body.data.content[0].id","vendorId")
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")

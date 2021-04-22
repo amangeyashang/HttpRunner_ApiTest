@@ -3,14 +3,15 @@ _author_ = 'Leo'
 __date__ = '2021/3/5 11:43'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.wechat.search.searchNearDepot_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
         Config("购物车列表")
             .variables(**{})
-            .base_url("${ENV(base_url_wechat_online)}")
+            .base_url("${ENV(base_url_wechat_develop_rest)}")
             .verify(False)
-            .export(*[])
+            .export(*["depotCode"])
     )
     teststeps = [
         Step(
@@ -25,14 +26,14 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_params(
                 **{
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "vendorCode":"$depotCode"
                 }
             )
             .with_json(
                 {
                     "memberId":"${ENV(memberId)}",
                     "channel":"WECHAT",
-                    "depotCode":"${ENV(vendorCode)}"
+                    "depotCode":"$depotCode"
                 }
             )
             .validate()

@@ -3,16 +3,23 @@ _author_ = 'Leo'
 __date__ = '2021/3/9 15:43'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.wechat.search.searchNearDepot_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
+from testcases.wechat.search.searchProduct_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
         Config("增减购物车数量")
             .variables(**{})
-            .base_url("${ENV(base_url_wechat_online)}")
+            .base_url("${ENV(base_url_wechat_develop_rest)}")
             .verify(False)
             .export(*[])
     )
     teststeps = [
+        Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["depotCode","productCode"])
+        ),
         Step(
             RunRequest("增减购物车数量-001")
             .with_variables(**{})
@@ -30,15 +37,15 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":28.45362,
                     "lon":109.006128,
                     "userToken":"684f2aa256a6408980cbb1f56602e250",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "vendorCode":"$depotCode"
                 }
             )
             .with_json(
                 {
-                    "productCode":"${ENV(productCode)}",
-                    "productOfDepotCode":"${ENV(vendorCode)}",
+                    "productCode":"$productCode",
+                    "productOfDepotCode":"$depotCode",
                     "quantity":1,
-                    "depotCode":"${ENV(vendorCode)}"
+                    "depotCode":"$depotCode"
                 }
             )
             .validate()

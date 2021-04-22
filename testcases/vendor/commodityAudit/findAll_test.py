@@ -3,16 +3,22 @@ _author_ = 'Leo'
 __date__ = '2021/4/13 16:42'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.vendor.userControl.getMemberId_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
         Config("查找所有品牌")
             .variables(**{})
-            .base_url("${ENV(base_url_vendor_online)}")
+            .base_url("${ENV(base_url_vendor_develop_vendor)}")
             .verify(False)
             .export(*[])
     )
     teststeps = [
+        Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["vendorCode","sellerId","vendorId"])
+        ),
         Step(
             RunRequest("查找所有品牌-001")
             .with_variables(**{})
@@ -25,11 +31,11 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "memberId":"${ENV(memberId)}",
-                    "userId":"${ENV(memberId)}",
-                    "vendorId":"${ENV(vendorId)}",
-                    "depotCode":"${ENV(vendorCode)}",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "memberId":"$sellerId",
+                    "userId":"$sellerId",
+                    "vendorId":"$vendorId",
+                    "depotCode":"$vendorCode",
+                    "vendorCode":"$vendorCode"
                 }
             )
             .validate()
