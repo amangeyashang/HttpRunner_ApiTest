@@ -3,6 +3,7 @@ _author_ = 'Leo'
 __date__ = '2021/3/22 11:30'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.wechat.search.searchNearDepot_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -13,6 +14,11 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .export(*[])
     )
     teststeps = [
+        Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["depotCode"])
+        ),
         Step(
             RunRequest("拼团详情-001")
             .with_variables(**{})
@@ -30,7 +36,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":"29.71797999388022",
                     "lon":"106.63042999999999",
                     "userToken":"c857660825954391ab036eed074861ad",
-                    "vendorCode":"${ENV(vendorCode)}",
+                    "vendorCode":"$depotCode",
                     "baseId":"826994780838891520"
                 }
             )

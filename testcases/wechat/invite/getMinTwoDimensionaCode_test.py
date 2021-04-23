@@ -3,6 +3,7 @@ _author_ = 'Leo'
 __date__ = '2021/3/10 17:54'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.wechat.search.searchNearDepot_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -24,7 +25,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":29.71797999388022,
                     "lon":106.63042999999999,
                     "userToken":"92b792df1b304a8d937d8119a4e50f3f",
-                    "vendorCode":"${ENV(vendorCode)}",
+                    "vendorCode":"$depotCode",
                     "minPath":"18716280028,VC10003,U"
                 }
             )

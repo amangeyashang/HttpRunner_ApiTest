@@ -3,6 +3,7 @@ _author_ = 'Leo'
 __date__ = '2021/3/10 11:37'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.wechat.search.searchNearDepot_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -13,6 +14,11 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .export(*[])
     )
     teststeps = [
+        Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["depotCode"])
+        ),
         Step(
             RunRequest("分页查询预存活动订单流水列表-未领取-001")
             .with_variables(**{})
@@ -30,13 +36,13 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":28.45362,
                     "lon":109.006128,
                     "userToken":"684f2aa256a6408980cbb1f56602e250",
-                    "vendorCode":"${ENV(vendorCode)}",
+                    "vendorCode":"$depotCode",
 
                 }
             )
             .with_json(
                 {
-                    "vendorCode":"${ENV(vendorCode)}",
+                    "vendorCode":"$depotCode",
                     "userId":"${ENV(memberId)}",
                     "pageInfo":
                         {
@@ -68,13 +74,13 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":28.45362,
                     "lon":109.006128,
                     "userToken":"684f2aa256a6408980cbb1f56602e250",
-                    "vendorCode":"${ENV(vendorCode)}",
+                    "vendorCode":"$depotCode",
 
                 }
             )
             .with_json(
                 {
-                    "vendorCode":"${ENV(vendorCode)}",
+                    "vendorCode":"$depotCode",
                     "userId":"${ENV(memberId)}",
                     "pageInfo":
                         {
@@ -106,13 +112,13 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":28.45362,
                     "lon":109.006128,
                     "userToken":"684f2aa256a6408980cbb1f56602e250",
-                    "vendorCode":"${ENV(vendorCode)}",
+                    "vendorCode":"$depotCode",
 
                 }
             )
             .with_json(
                 {
-                    "vendorCode":"${ENV(vendorCode)}",
+                    "vendorCode":"$depotCode",
                     "userId":"${ENV(memberId)}",
                     "pageInfo":
                         {

@@ -3,9 +3,8 @@ _author_ = 'Leo'
 __date__ = '2021/3/5 10:58'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
-
+from testcases.wechat.search.searchNearDepot_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 from .getTemplate_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)#导入引用的类
-
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -17,7 +16,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
         Step(
             RunTestCase("request with functions")
             .call(RequestWithFunctions)#导入后就可以调用了
-            .export(*["templateId1","templateType1"])#在RunTestCase步骤中定义这个变量的导出
+            .export(*["depotCode","templateId1","templateType1"])#在RunTestCase步骤中定义这个变量的导出
         ),
         Step(
             RunRequest("获取模板详情-001")
@@ -31,7 +30,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "vendorCode": "${ENV(vendorCode)}",
+                    "vendorCode": "$depotCode",
                     "templateId": "$templateId1",
                     "advertisementType": "$templateType1"
                 }

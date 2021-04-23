@@ -19,7 +19,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
         Step(
             RunTestCase("导出变量")
             .call(RequestWithFunctions)
-            .export(*["vendorId","vendorCode"])
+            .export(*["vendorId","depotCode"])
         ),
         Step(
             RunRequest("一键领取优惠券-001")
@@ -34,7 +34,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .with_json(
                 {
                     "vendorId": "$vendorId",
-                    "vendorCode": "$vendorCode",
+                    "vendorCode": "$depotCode",
                     "userId": "${ENV(memberId)}"
                 }
             )

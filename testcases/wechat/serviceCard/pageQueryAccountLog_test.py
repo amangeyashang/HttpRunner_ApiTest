@@ -3,6 +3,7 @@ _author_ = 'Leo'
 __date__ = '2021/3/10 16:01'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.wechat.search.searchNearDepot_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -14,12 +15,17 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["depotCode"])
+        ),
+        Step(
             RunRequest("分页查询账户资金明细-001")
             .with_variables(**{})
             .get("/account/query/pageQueryAccountLog")
             .with_params(
                 **{
-                    "vendorCode":"${ENV(vendorCode)}",
+                    "vendorCode":"$depotCode",
                     "accountNo":"20200909000000000026",
                     "pageNo":1,
                     "pageSize":20,

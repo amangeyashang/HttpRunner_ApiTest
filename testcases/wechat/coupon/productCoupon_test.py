@@ -3,6 +3,7 @@ _author_ = 'Leo'
 __date__ = '2021/3/9 10:46'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.wechat.search.searchProduct_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -13,6 +14,11 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .export(*[])
     )
     teststeps = [
+        Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["productCode"])
+        ),
         Step(
             RunRequest("商品优惠券-001")
             .with_variables(**{})
@@ -26,7 +32,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .with_json(
                 {
                     "couponChannelType":"UNIVERSAL",
-                    "productCode":"${ENV(productCode)}"
+                    "productCode":"$productCode"
                 }
             )
             .validate()

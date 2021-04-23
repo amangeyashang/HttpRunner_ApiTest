@@ -3,6 +3,7 @@ _author_ = 'Leo'
 __date__ = '2021/3/22 10:53'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.wechat.search.searchNearDepot_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -30,7 +31,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":"29.71797999388022",
                     "lon":"106.63042999999999",
                     "userToken":"c857660825954391ab036eed074861ad",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "vendorCode":"$depotCode"
                 }
             )
             .with_json(
@@ -61,7 +62,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":"29.71797999388022",
                     "lon":"106.63042999999999",
                     "userToken":"c857660825954391ab036eed074861ad",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "vendorCode":"$depotCode"
                 }
             )
             .with_json(
@@ -92,7 +93,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":"29.71797999388022",
                     "lon":"106.63042999999999",
                     "userToken":"c857660825954391ab036eed074861ad",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "vendorCode":"$depotCode"
                 }
             )
             .with_json(
@@ -123,7 +124,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":"29.71797999388022",
                     "lon":"106.63042999999999",
                     "userToken":"c857660825954391ab036eed074861ad",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "vendorCode":"$depotCode"
                 }
             )
             .with_json(

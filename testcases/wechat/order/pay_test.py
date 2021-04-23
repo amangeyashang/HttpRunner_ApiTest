@@ -15,7 +15,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunTestCase("request with functions")
+            RunTestCase("导出变量")
             .call(RequestWithFunctions)
             .export(*["summaryOrderCode"])
         ),

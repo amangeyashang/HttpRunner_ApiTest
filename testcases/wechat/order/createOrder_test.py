@@ -3,6 +3,9 @@ _author_ = 'Leo'
 __date__ = '2021/3/9 20:43'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.wechat.search.searchNearDepot_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
+from testcases.wechat.search.searchProduct_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
+from .buildSettle_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -10,9 +13,14 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .variables(**{})
             .base_url("${ENV(base_url_wechat_develop_rest)}")
             .verify(False)
-            .export(*["summaryOrderCode"])
+            .export(*[])
     )
     teststeps = [
+        Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["depotCode","productCode","consigneeId"])
+        ),
         Step(
             RunRequest("创建订单-001")
             .with_variables(**{})
@@ -25,28 +33,20 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "consigneeId":71,
+                    "consigneeId":"$consigneeId",
                     "paymentType":"WECHAT",
                     "deliverType":"USER_TRANSPORT",
                     "userRemark":"",
                     "productVos":
                         [
                             {
-                                "depotCode":"${ENV(vendorCode)}",
-                                "productCode":"${ENV(productCode)}",
+                                "depotCode":"$depotCode",
+                                "productCode":"$productCode",
                                 "quantity":1
                             }
                         ],
                     "orderClient":"wechat",
-                    "userId":"${ENV(memberId)}",
-                    "deportSelectedCouponPromotion":
-                        [
-                            {
-                                "depotCode":"${ENV(vendorCode)}",
-                                "selectedCouponId":"864618667424419840",
-                                "selectedPromotionId":'null'
-                            }
-                        ]
+                    "userId":"${ENV(memberId)}"
                 }
             )
             .extract()

@@ -3,6 +3,7 @@ _author_ = 'Leo'
 __date__ = '2021/3/11 9:21'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from .findRecommendeBymemberId_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -13,6 +14,11 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             .export(*[])
     )
     teststeps = [
+        Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["VendorMemberId"])
+        ),
         Step(
             RunRequest("查询我的推荐下级列表-001")
             .with_variables(**{})
@@ -25,7 +31,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_json(
                 {
-                    "vendorMemberId":41,
+                    "vendorMemberId":"$VendorMemberId",
                     "page":0,
                     "size":20
                 }
