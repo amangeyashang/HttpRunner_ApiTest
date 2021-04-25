@@ -67,7 +67,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":29.71797999388022,
                     "lon":106.63042999999999,
                     "userToken":"92b792df1b304a8d937d8119a4e50f3f",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "vendorCode":"$depotCode"
                 }
             )
             .with_json(
@@ -98,7 +98,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":29.71797999388022,
                     "lon":106.63042999999999,
                     "userToken":"92b792df1b304a8d937d8119a4e50f3f",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "vendorCode":"$depotCode"
                 }
             )
             .with_json(
@@ -129,7 +129,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":29.71797999388022,
                     "lon":106.63042999999999,
                     "userToken":"92b792df1b304a8d937d8119a4e50f3f",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "vendorCode":"$depotCode"
                 }
             )
             .with_json(
@@ -160,7 +160,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lat":29.71797999388022,
                     "lon":106.63042999999999,
                     "userToken":"92b792df1b304a8d937d8119a4e50f3f",
-                    "vendorCode":"${ENV(vendorCode)}"
+                    "vendorCode":"$depotCode"
                 }
             )
             .with_json(

@@ -34,6 +34,8 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "vendorCode":"$depotCode"
                 }
             )
+            .extract()
+            .with_jmespath("body.infoList[0].id","promotionId")
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.message","成功")

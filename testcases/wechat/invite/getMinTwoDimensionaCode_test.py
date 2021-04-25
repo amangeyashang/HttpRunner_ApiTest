@@ -15,6 +15,11 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
+            RunTestCase("导出变量")
+            .call(RequestWithFunctions)
+            .export(*["depotCode"])
+        ),
+        Step(
             RunRequest("获取带参小程序二维码-001")
             .with_variables(**{})
             .get("/weChat/getMinTwoDimensionaCode")
@@ -26,7 +31,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                     "lon":106.63042999999999,
                     "userToken":"92b792df1b304a8d937d8119a4e50f3f",
                     "vendorCode":"$depotCode",
-                    "minPath":"18716280028,VC10003,U"
+                    "minPath":"18716280028,$depotCode,U"
                 }
             )
             .validate()
