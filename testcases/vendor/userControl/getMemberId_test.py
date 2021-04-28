@@ -25,7 +25,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
             )
             .with_params(
                 **{
-                    "Authorization":"5dce0854-4208-4966-91cc-7ba5c3871927"
+                    "Authorization":"f2498cbd-c2ac-4111-aa84-653620495d5c"
                 }
             )
             .with_json({})
