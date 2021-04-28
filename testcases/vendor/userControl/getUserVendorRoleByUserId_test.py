@@ -3,7 +3,7 @@ _author_ = 'Leo'
 __date__ = '2021/3/12 9:47'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
-from .getMemberId_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
+from testcases.vendor.storeInformation.getDetail_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (

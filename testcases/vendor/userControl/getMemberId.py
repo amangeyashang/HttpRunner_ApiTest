@@ -29,10 +29,6 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
                 }
             )
             .with_json({})
-            .extract()
-            .with_jmespath("body.data.vendorCode","vendorCode")
-            .with_jmespath("body.data.memberId","sellerId")
-            .with_jmespath("body.data.vendorId","vendorId")
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")

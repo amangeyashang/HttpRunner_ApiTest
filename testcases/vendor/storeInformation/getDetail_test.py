@@ -3,7 +3,6 @@ _author_ = 'Leo'
 __date__ = '2021/3/12 11:09'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
-from testcases.vendor.userControl.getMemberId_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -14,25 +13,19 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
     )
     teststeps = [
         Step(
-            RunTestCase("导出变量")
-            .call(RequestWithFunctions)
-            .export(*["vendorCode","sellerId","vendorId"])
-        ),
-        Step(
             RunRequest("店铺基础数据-001")
             .with_variables(**{})
             .get("/vendorRegister/getDetail")
             .with_params(
                 **{
-                    "memberId":"$sellerId",
-                    "userId":"$sellerId",
-                    "vendorId":"$vendorId",
-                    "depotCode":"$vendorCode",
-                    "vendorCode":"$vendorCode"
+                    "vendorId":"${ENV(vendorId)}"
                 }
             )
             .extract()
+            .with_jmespath("body.data.id","vendorId")
+            .with_jmespath("body.data.userId","sellerId")
             .with_jmespath("body.data.vendorName","vendorName")
+            .with_jmespath("body.data.vendorCode","vendorCode")
             .validate()
             .assert_equal("status_code",200)
             .assert_equal("body.msg","success")

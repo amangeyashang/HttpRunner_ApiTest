@@ -3,7 +3,7 @@ _author_ = 'Leo'
 __date__ = '2021/4/21 15:12'
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
-from testcases.vendor.userControl.getMemberId_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
+from testcases.vendor.storeInformation.getDetail_test import (TestCaseDemoTestcaseRequest as RequestWithFunctions)
 class TestCaseDemoTestcaseRequest(HttpRunner):
 
     config = (
@@ -16,7 +16,7 @@ class TestCaseDemoTestcaseRequest(HttpRunner):
         Step(
             RunTestCase("导出变量")
             .call(RequestWithFunctions)
-            .export(*["vendorCode","sellerId","vendorId"])
+            .export(*["vendorCode","sellerId","vendorId","vendorName"])
         ),
         Step(
             RunRequest("采购商品分页-001")
